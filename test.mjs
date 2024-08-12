@@ -34,6 +34,7 @@ const ioc = {
 
 init();
 
+console.log(ioc.serviceFoo.bar.foo.bar.foo.bar.baz.name);
 console.log(ioc.serviceFoo.bar.name);
 console.log(ioc.serviceBar.foo.name);
 console.log(ioc.serviceBar.baz.name);
