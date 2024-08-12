@@ -1,0 +1,47 @@
+{
+  "name": "di-kit",
+  "version": "1.0.6",
+  "readme": "README.md",
+  "description": "Minimal ioc container which allow circular dependency injection",
+  "private": false,
+  "scripts": {
+    "test": "node ./test.mjs"
+  },
+  "author": {
+    "name": "Petr Tripolsky",
+    "email": "tripolskypetr@gmail.com",
+    "url": "https://github.com/tripolskypetr"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/react-declarative",
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "ioc",
+    "typescript",
+    "dependency-injection"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-declarative/react-declarative",
+    "documentation": "https://github.com/react-declarative/react-declarative/tree/master/docs"
+  },
+  "bugs": {
+    "url": "https://github.com/react-declarative/react-declarative/issues"
+  },
+  "type": "module",
+  "types": "index.d.ts",
+  "module": "index.mjs",
+  "exports": {
+    "require": "./index.mjs",
+    "types": "./index.d.ts",
+    "import": "./index.mjs",
+    "default": "./index.mjs"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/react-declarative/react-declarative#license"
+    }
+  ]
+}
