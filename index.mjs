@@ -17,12 +17,14 @@ const getInstance = (name) => {
     return {};
 }
 
+const createInitializer = (name, self) => () => {
+    Object.setPrototypeOf(self, getInstance(name));
+};
+
 class InstanceAccessor {
     constructor(name) {
         this.name = name;
-    }
-    [INIT_FN] = () => {
-        Object.setPrototypeOf(this, getInstance(this.name));
+        this[INIT_FN] = createInitializer(name, this);
     }
 }
 
