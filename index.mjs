@@ -28,7 +28,7 @@ export const createActivator = (namespace = "unknown") => {
             instanceMap.set(name, instance);
             return instance;
         }
-        console.warn(`di-kit namespace=${namespace} name=${name} not provided`);
+        console.warn(`di-kit namespace=${namespace} name=${String(name)} not provided`);
         return {};
     }
     
