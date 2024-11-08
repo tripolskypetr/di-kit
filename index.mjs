@@ -1,7 +1,7 @@
 export const createActivator = (namespace = "unknown") => {
 
-    const ACTIVATOR_FN = Symbol('activator-fn');
-    const INIT_FN = Symbol('init-fn');
+    const INIT_SERVICE_FN = Symbol('init-service-fn');
+    const INIT_CALL_FN = Symbol('init-call-fn');
 
     const accessorMap = new Map();
     const factoryMap = new Map();
@@ -32,7 +32,7 @@ export const createActivator = (namespace = "unknown") => {
         return {};
     }
     
-    const createActivator = (name, self) => 
+    const createService = (name, self) => 
         singleshot(() => {
             Object.setPrototypeOf(self, getInstance(name));
         });
@@ -45,8 +45,8 @@ export const createActivator = (namespace = "unknown") => {
     class InstanceAccessor {
         constructor(name) {
             this.name = name;
-            this[ACTIVATOR_FN] = createActivator(name, this);
-            this[INIT_FN] = createInitializer(this);
+            this[INIT_SERVICE_FN] = createService(name, this);
+            this[INIT_CALL_FN] = createInitializer(this);
         }
     }
     
@@ -64,10 +64,10 @@ export const createActivator = (namespace = "unknown") => {
     
     const init = () => {
         for (const accessor of accessorMap.values()) {
-            accessor[ACTIVATOR_FN]();
+            accessor[INIT_SERVICE_FN]();
         }
         for (const accessor of accessorMap.values()) {
-            accessor[INIT_FN]();
+            accessor[INIT_CALL_FN]();
         }
     };
     
