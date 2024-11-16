@@ -52,3 +52,29 @@ console.log(ioc.serviceBar.foo.name);
 console.log(ioc.serviceBar.baz.name);
 
 ```
+
+## See also
+
+If you looking for ASP.Net Core Scoped Services alternative for NodeJS take a look on [di-scoped npm package](https://www.npmjs.com/package/di-scoped)
+
+```tsx
+
+import { scoped } from 'di-scoped';
+
+const TestClass = scoped(class {
+
+    constructor(private name: string) {
+    }
+
+    test() {
+        console.log(`Hello, ${this.name}`);
+    }
+});
+
+
+TestClass.runInContext(() => {
+
+    new TestClass().test(); // Hello, Peter
+
+}, "Peter")
+```
