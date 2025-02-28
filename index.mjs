@@ -72,10 +72,11 @@ export const createActivator = (namespace = "unknown") => {
     };
     
     return {
+        InstanceAccessor,
         provide,
         inject,
         init,
     };
 }
 
-export const { provide, inject, init } = createActivator('root');
+export const { InstanceAccessor, provide, inject, init } = createActivator('root');

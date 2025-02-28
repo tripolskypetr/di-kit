@@ -8,4 +8,7 @@ declare module "di-kit" {
         provide<T = object>(key: Key, ctor: T | (() => T)): void
         init(): void;
     };
+    export class InstanceAccessor {
+        public readonly name: string;
+    }
 }
