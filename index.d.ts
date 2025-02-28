@@ -7,6 +7,7 @@ declare module "di-kit" {
         inject<T = object>(key: Key): T;
         provide<T = object>(key: Key, ctor: T | (() => T)): void
         init(): void;
+        InstanceAccessor: InstanceAccessor;
     };
     export class InstanceAccessor {
         public readonly name: string;
