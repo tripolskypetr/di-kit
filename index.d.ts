@@ -3,10 +3,12 @@ declare module "di-kit" {
     export function inject<T = object>(key: Key): T;
     export function provide<T = object>(key: Key, ctor: T | (() => T)): void
     export function init(): void;
+    export function override<T = object>(key: Key, instance: T): void
     export function createActivator(name?: string): {
         inject<T = object>(key: Key): T;
         provide<T = object>(key: Key, ctor: T | (() => T)): void
         init(): void;
+        override<T = object>(key: Key, instance: T): void
         InstanceAccessor: InstanceAccessor;
     };
     export class InstanceAccessor {

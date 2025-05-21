@@ -62,6 +62,13 @@ export const createActivator = (namespace = "unknown") => {
         ? accessorMap.get(name)
         : accessorMap.set(name, new InstanceAccessor(name)).get(name);
     
+    const override = (name, target) => {
+        const instance = accessorMap.has(name)
+            ? accessorMap.get(name)
+            : accessorMap.set(name, new InstanceAccessor(name)).get(name);
+        Object.setPrototypeOf(instance, target);
+    };
+
     const init = () => {
         for (const accessor of accessorMap.values()) {
             accessor[INIT_SERVICE_FN]();
@@ -76,7 +83,8 @@ export const createActivator = (namespace = "unknown") => {
         provide,
         inject,
         init,
+        override,
     };
 }
 
-export const { InstanceAccessor, provide, inject, init } = createActivator('root');
+export const { InstanceAccessor, provide, inject, init, override } = createActivator('root');
