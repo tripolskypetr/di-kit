@@ -65,10 +65,12 @@ export const createActivator = (namespace = "unknown") => {
         : accessorMap.set(name, new InstanceAccessor(name)).get(name);
     
     const override = (name, target) => {
-        const instance = accessorMap.has(name)
-            ? accessorMap.get(name)
-            : accessorMap.set(name, new InstanceAccessor(name)).get(name);
-        Object.setPrototypeOf(instance, target);
+        {
+            const instance = accessorMap.get(name);
+            instance && Object.setPrototypeOf(instance, target);
+        }
+        factoryMap.set(name, () => target);
+        instanceMap.set(name, target);
     };
 
     const init = () => {
