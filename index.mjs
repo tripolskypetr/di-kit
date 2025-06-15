@@ -1,3 +1,5 @@
+const BEFORE_INIT_LIFECYCLE = [];
+
 export const createActivator = (namespace = "unknown") => {
 
     const INIT_SERVICE_FN = Symbol('init-service-fn');
@@ -70,12 +72,25 @@ export const createActivator = (namespace = "unknown") => {
     };
 
     const init = () => {
+        for (const fn of BEFORE_INIT_LIFECYCLE) {
+            fn(namespace, override);
+        }
         for (const accessor of accessorMap.values()) {
             accessor[INIT_SERVICE_FN]();
         }
         for (const accessor of accessorMap.values()) {
             accessor[INIT_CALL_FN]();
         }
+    };
+
+    const beforeInit = (fn) => {
+        BEFORE_INIT_LIFECYCLE.push(fn);
+        return () => {
+            const index = BEFORE_INIT_LIFECYCLE.indexOf(fn);
+            if (index !== -1) {
+                BEFORE_INIT_LIFECYCLE.splice(index, 1);
+            }
+        };
     };
     
     return {
@@ -84,7 +99,8 @@ export const createActivator = (namespace = "unknown") => {
         inject,
         init,
         override,
+        beforeInit,
     };
 }
 
-export const { InstanceAccessor, provide, inject, init, override } = createActivator('root');
+export const { InstanceAccessor, provide, inject, init, override, beforeInit } = createActivator('root');

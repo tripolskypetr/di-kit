@@ -1,6 +1,6 @@
 {
   "name": "di-kit",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "readme": "README.md",
   "description": "Minimal ioc container which allow circular dependency injection",
   "private": false,
